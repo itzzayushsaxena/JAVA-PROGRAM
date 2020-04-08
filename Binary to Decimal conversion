@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class b2d{
+	public static int bin2Dec(String bs) throws NumberFormatException{
+		int d=0;
+		for(int i=0;i<bs.length();i++)
+		{
+			Character ch=bs.charAt(i);
+			String tempStr=ch.toString();
+			int tempInt=Integer.parseInt(tempStr);
+			if(tempInt!=0 && tempInt!=1)
+			{
+				System.out.println("Invalid binary number!!");
+				System.exit(0);
+			}
+			d=d*2+tempInt;
+		}
+		return d;
+	}
+	
+	public static void main(String args[]){
+		Scanner obj=new Scanner(System.in);
+		System.out.print("Enter the binary number:");
+		String bs = obj.nextLine();
+		System.out.print(bin2Dec(bs));
+	}
+}	
+	
