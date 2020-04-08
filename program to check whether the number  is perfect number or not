@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+class perfect_n{
+	public static void main(String args[]){
+		Scanner obj=new Scanner(System.in);
+		System.out.print("Enter a number:");
+		int n = obj.nextInt();
+		int fact = 1,sum=0;
+		while(fact<=(n/2))
+		{
+			if(n%fact==0)
+			{
+				sum=sum+fact;
+			}
+			fact++;
+		}
+		if(sum==n)
+			System.out.println(n+" is a perfect number.");
+		else
+			System.out.println(n+" is not a perfect number.");
+	  }
+  }
