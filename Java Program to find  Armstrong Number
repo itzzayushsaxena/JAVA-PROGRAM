@@ -1,0 +1,23 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+class armstrong{
+	public static void main(String args[]){
+		Scanner obj=new Scanner(System.in);
+		System.out.print("Enter a number:");
+		int n = obj.nextInt();
+		int num,sum=0;
+		int temp=n;
+		while(temp!=0)
+		{
+			num=temp%10;
+			int cube= (int) Math.pow(num,3);
+			sum=sum+cube;
+			temp=temp/10;
+		}
+		if(sum==n)
+			System.out.println(n+" is an armstrong number.");
+		else
+			System.out.println(n+" is not an armstrong number.");
+	}
+}
