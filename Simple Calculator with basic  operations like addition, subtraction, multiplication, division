@@ -1,17 +1,24 @@
+// Java program to create a simple calculator 
+// with basic +, -, /, * using java swing elements 
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
 public class g_cal extends JFrame implements ActionListener{
-		static JFrame f;
-		static JTextField t;
-		String s0,s1,s2;
-		
-	g_cal(){
-		s0=s1=s2="";
-	}
+    // create a frame		
+    static JFrame f;
+    // create a textfield
+    static JTextField t;
+    // String for storing oprerator and operands
+    String s0,s1,s2;
+    // default constrcutor	
+    g_cal(){
+	s0=s1=s2="";
+    }
 		
 	public static void main(String args[]){
+                        // create a frame
 			f = new JFrame("Calculator");
 			
 			try{
@@ -20,13 +27,13 @@ public class g_cal extends JFrame implements ActionListener{
 			catch(Exception e){
 				System.out.println(e.getMessage());
 			} 
-			
+			// create a object of class
 			g_cal c = new g_cal();
-
+                        // create a textfield
 			t = new JTextField(16);
-			
+			// set the textfield to non editable
 			t.setEditable(false);
-			
+			// create number buttons and some operator buttons
 			JButton b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,bq,ba,bs,bm,bd,bc,bp;
 			
 			b0 = new JButton("0");
@@ -46,9 +53,9 @@ public class g_cal extends JFrame implements ActionListener{
 			bd = new JButton("/");
 			bc = new JButton("C");
 			bp = new JButton(".");
-			
+			// create a panel
 			JPanel p = new JPanel();
-			
+			// add action listeners 
 			b0.addActionListener(c);
 			b1.addActionListener(c);
 			b2.addActionListener(c);
@@ -66,7 +73,7 @@ public class g_cal extends JFrame implements ActionListener{
 			bd.addActionListener(c);
 			bc.addActionListener(c);
 			bp.addActionListener(c);
-			
+			// add elements to panel
 			p.add(t);
 			p.add(b0);
 			p.add(b1);
@@ -85,9 +92,9 @@ public class g_cal extends JFrame implements ActionListener{
 			p.add(bq);
 			p.add(bs);
 			p.add(bp);
-			
+			// set Background of panel
 			p.setBackground(Color.white);
-			
+			// add panel to frame
 			f.add(p);
 			f.setSize(200,220);
 			f.show();
@@ -95,20 +102,25 @@ public class g_cal extends JFrame implements ActionListener{
 		
 	public void actionPerformed(ActionEvent e){
 			String s = e.getActionCommand();
-			if((s.charAt(0) >= '0' && s.charAt(0) <= '9') || s.charAt(0) == '.'){
-				if(!s1.equals(""))
+			// if the value is a number
+                        if((s.charAt(0) >= '0' && s.charAt(0) <= '9') || s.charAt(0) == '.'){
+				// if operand is present then add to second no
+                                if(!s1.equals(""))
 					s2 = s2+s;
 				else
 					s0=s0+s;
+                        // set the value of text
 			t.setText(s0 + s1 + s2);
 			}
 			else if(s.charAt(0) == 'C'){
+                                // clear the one letter
 				s0 = s1 = s2 = "";
+                                // set the value of text
 				t.setText(s0 + s1 + s2);
                         }
 			else if(s.charAt(0) == '='){
 				double res;
-                              
+                                // store the value in s1
 				if(s1.equals("+"))
 					res = (Double.parseDouble(s0) + Double.parseDouble(s2));
 				else if(s1.equals("-"))
@@ -117,32 +129,38 @@ public class g_cal extends JFrame implements ActionListener{
 					res = (Double.parseDouble(s0) / Double.parseDouble(s2));
 				else 
 					res = (Double.parseDouble(s0) * Double.parseDouble(s2));
-                                
-                                t.setText( "" +res ); 
-                                s0 = Double.toString(res); 
-                                s1 = s2 = ""; 
-                        }
-                        else
-                        {
-                            if (s1.equals("") || s2.equals("")) 
-                                s1 = s; 
-                            else { 
-                                double te;
-                               
-                                if (s1.equals("+")) 
-                                    te = (Double.parseDouble(s0) + Double.parseDouble(s2)); 
-                                else if (s1.equals("-")) 
-                                    te = (Double.parseDouble(s0) - Double.parseDouble(s2)); 
-                                else if (s1.equals("/")) 
-                                    te = (Double.parseDouble(s0) / Double.parseDouble(s2)); 
-                                else
-                                    te = (Double.parseDouble(s0) * Double.parseDouble(s2));
-                               
-                                 s0 = Double.toString(te); 
-                                 s1=s;
-                                 s2="";
-                            }
-                        t.setText(s0 + s1 + s2);
-                        }
+                    // set the value of text
+                    t.setText( "" +res ); 
+                    // convert it to string
+                    s0 = Double.toString(res); 
+                    s1 = s2 = ""; 
+            }
+            else
+            {
+                // if there was no operand
+                if (s1.equals("") || s2.equals("")) 
+                s1 = s; 
+                // else evaluate
+                else { 
+                    double te;
+                    // store the value in 1st
+                    if (s1.equals("+")) 
+						te = (Double.parseDouble(s0) + Double.parseDouble(s2)); 
+					else if (s1.equals("-")) 
+                        te = (Double.parseDouble(s0) - Double.parseDouble(s2)); 
+                    else if (s1.equals("/")) 
+                        te = (Double.parseDouble(s0) / Double.parseDouble(s2)); 
+                    else
+                        te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+                    // convert it to string 
+                    s0 = Double.toString(te); 
+                    // place the operator
+                    s1=s;
+                    // make the operand blank
+                    s2="";
+                }
+                // set the value of text
+                t.setText(s0 + s1 + s2);
+           	}
 	}
 }
